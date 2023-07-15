@@ -1,0 +1,26 @@
+default_config:
+
+homeassistant:
+
+pyscript:
+  allow_all_imports: true
+  hass_is_global: true
+
+media_player: 
+  - platform: universal
+    name: Dreame D9 player
+    unique_id: player_dreame_d9
+    commands:
+      play_media:
+        service: pyscript.media_play_ssh
+        data:
+          host: dreame.yangl
+          media_content_id: "{{ media_content_id }}"
+          entity_id: media_player.dreame_d9
+
+notify:
+  - platform: tts
+    name: dreame_d9
+    tts_service: tts.google_translate_say
+    media_player: media_player.dreame_d9
+    language: ru
